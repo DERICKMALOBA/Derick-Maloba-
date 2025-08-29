@@ -1280,16 +1280,13 @@
           <div class="hero-text">
             <h1>Hi, I'm <span>Derick Maloba</span></h1>
             <p>
-              Full Stack Developer & DevOps Engineer specializing in building
-              scalable, cloud-native application, and modern infrastructure
-              tools. Passionate about creating elegant solutions to complex
-              problems with CI/CD pipelines and infrastructure as code.
+             As a Software Developer and DevOps Engineer, I bridge the gap between code and infrastructure to create systems that don’t just work—but scale, adapt, and thrive. I craft intuitive, user-focused applications on the front end while engineering rock-solid, automated pipelines on the back end. With CI/CD, cloud-native architectures, and Infrastructure as Code, I transform ideas into resilient, high-performing solutions that deliver impact at every level. My passion lies in building technology that feels effortless to use but is powered by modern engineering excellence behind the scenes
             </p>
             <div class="cta-buttons">
               <a href="#contact" class="btn">Contact Me</a>
 
               <a
-                href="assets/DERICK MALOBA CV.pdf"
+                href="assets//Derick Maloba.CV (3).pdf"
                 class="btn btn-outline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1571,18 +1568,17 @@
           </div>
           <div class="about-text">
             <h3 style="text-align: justify">
-              Full Stack Software & DevOps Engineer Based in Nairobi, Kenya
+               Software & DevOps Engineer 
             </h3>
             <p style="text-align: justify">
-              I'm a passionate software engineer and DevOps specialist with over
-              5 years of experience building and deploying scalable web
+              I'm a passionate software engineer and DevOps specialist  experienced in building and deploying scalable web
               applications. I excel at both application development and
               infrastructure automation, bridging the gap between code and
               production environments.
             </p>
             <p style="text-align: justify">
               My full-stack expertise spans JavaScript ecosystems (React,
-              Node.js) while my DevOps capabilities include CI/CD pipelines,
+              Node.js, Python) while my DevOps capabilities include CI/CD pipelines,
               cloud infrastructure, and containerization. I architect solutions
               that are not just well-coded but also optimally deployed,
               monitored, and maintained.
@@ -1595,8 +1591,9 @@
             </p>
             <p style="text-align: justify">
               When not engineering systems, you'll find me contributing to
-              open-source projects, reading blogs , or exploring Kenya's hiking
-              trails.
+              open-source projects, reading blogs , or experimenting with new
+              technologies. I'm always eager to learn and take on new challenges
+              that push my skills further.
             </p>
 
             <div class="skills">
@@ -1997,26 +1994,37 @@
       });
 
       // Form submission
-      const contactForm = document.querySelector(".contact-form form");
+     // Form submission
+const contactForm = document.querySelector(".contact-form form");
 
-      contactForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-        // Get form values
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const subject = document.getElementById("subject").value;
-        const message = document.getElementById("message").value;
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const subject = document.getElementById("subject").value;
+  const message = document.getElementById("message").value;
 
-        // Here you would typically send the form data to a server
-        console.log({ name, email, subject, message });
+  try {
+    const response = await fetch("http://localhost:8000/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, subject, message }),
+    });
 
-        // Show success message
-        alert("Thank you for your message! I will get back to you soon.");
+    const result = await response.json();
 
-        // Reset form
-        contactForm.reset();
-      });
+    if (result.success) {
+      alert("✅ Thank you! Your message has been sent.");
+      contactForm.reset();
+    } else {
+      alert("❌ Failed to send message. Please try again later.");
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("❌ There was an error sending your message.");
+  }
+});
 
       // Adjust hero section height dynamically
       function adjustHeroHeight() {
