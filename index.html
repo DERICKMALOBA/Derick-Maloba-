@@ -2016,14 +2016,14 @@ contactForm.addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (result.success) {
-      alert("✅ Thank you! Your message has been sent.");
+      alert(" Thank you! Your message has been sent.");
       contactForm.reset();
     } else {
-      alert("❌ Failed to send message. Please try again later.");
+      alert("Failed .Please try again later.");
     }
   } catch (err) {
     console.error("Error:", err);
-    alert("❌ There was an error sending your message.");
+    alert(" There was an error sending your message.");
   }
 });
 
