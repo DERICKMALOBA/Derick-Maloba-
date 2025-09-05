@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Derick Maloba Software Engineer|devOps Engineer</title>
+<!-- Toastify CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+<!-- Toastify JS -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <link
       rel="stylesheet"
@@ -1994,9 +1999,14 @@
         observer.observe(section);
       });
 
-      // Form submission
-     // Form submission
+      
+ 
+
+
+
+// Form submission
 const contactForm = document.querySelector(".contact-form form");
+const submitBtn = contactForm.querySelector("button[type='submit']");
 
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -2005,6 +2015,10 @@ contactForm.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const subject = document.getElementById("subject").value;
   const message = document.getElementById("message").value;
+
+  // Disable button & show loading text
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
 
   try {
     const response = await fetch("https://derick-maloba-portfolio.onrender.com/send-email", {
@@ -2016,14 +2030,40 @@ contactForm.addEventListener("submit", async (e) => {
     const result = await response.json();
 
     if (result.success) {
-      alert(" Thank you! Your message has been sent.");
+      Toastify({
+        text: "Thank you! for the message I'll get back to you.",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4CAF50",
+        close: true
+      }).showToast();
+
       contactForm.reset();
     } else {
-      alert("Failed .Please try again later.");
+      Toastify({
+        text: "Failed. Please try again later.",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#f44336",
+        close: true
+      }).showToast();
     }
   } catch (err) {
     console.error("Error:", err);
-    alert(" There was an error sending your message.");
+    Toastify({
+      text: "There was an error sending your message.",
+      duration: 4000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#ff9800",
+      close: true
+    }).showToast();
+  } finally {
+    // Re-enable button & restore text
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Send Message";
   }
 });
 
