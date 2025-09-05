@@ -2007,7 +2007,7 @@ contactForm.addEventListener("submit", async (e) => {
   const message = document.getElementById("message").value;
 
   try {
-    const response = await fetch("http://localhost:8000/send-email", {
+    const response = await fetch("https://derick-maloba-portfolio.onrender.com/send-email", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, subject, message }),
