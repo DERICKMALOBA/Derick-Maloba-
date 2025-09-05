@@ -47,5 +47,7 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
+app.use(express.static("public"));
+
 const PORT = process.env.PORT ;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
